@@ -48,7 +48,8 @@
 .wp24h-hub-search button { display: inline-flex; min-width: 48px; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; border: 0; border-radius: 10px; background: linear-gradient(135deg, var(--wp24h-cyan), var(--wp24h-blue)); color: #03101e; cursor: pointer; font-size: 13px; font-weight: 800; }
 
 .wp24h-hub-featured { display: grid; grid-template-columns: 1fr; gap: 18px; padding-top: 42px; }
-.wp24h-hub-featured-card { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(340px, .85fr); min-height: 430px; overflow: hidden; border: 1px solid var(--wp24h-border); border-radius: 22px; background: var(--wp24h-surface); box-shadow: 0 22px 70px rgb(0 5 18 / 24%); }
+.wp24h-hub-featured-card { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(340px, .85fr); min-height: 430px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--wp24h-card-tone) 32%, transparent); border-radius: 22px; background: var(--wp24h-surface); box-shadow: 0 22px 70px rgb(0 5 18 / 24%); transition: border-color 180ms ease, box-shadow 180ms ease; }
+.wp24h-hub-featured-card:hover { border-color: color-mix(in srgb, var(--wp24h-card-tone) 68%, transparent); box-shadow: 0 24px 72px color-mix(in srgb, var(--wp24h-card-tone) 12%, rgb(0 5 18 / 24%)); }
 .wp24h-hub-featured-card__media { display: block; min-height: 430px; overflow: hidden; }
 .wp24h-hub-featured-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
 .wp24h-hub-featured-card:hover .wp24h-hub-featured-card__media img { transform: scale(1.025); }
@@ -65,6 +66,16 @@
 .wp24h-hub-label--sky { --wp24h-label: #70c6ff; }
 .wp24h-hub-label--rose { --wp24h-label: #f08aaa; }
 .wp24h-hub-label--slate { --wp24h-label: #a8b8cf; }
+.wp24h-hub-card-tone--cyan { --wp24h-card-tone: #20c9ed; }
+.wp24h-hub-card-tone--blue { --wp24h-card-tone: #4b96ff; }
+.wp24h-hub-card-tone--green { --wp24h-card-tone: #50d890; }
+.wp24h-hub-card-tone--lime { --wp24h-card-tone: #a7d52d; }
+.wp24h-hub-card-tone--violet { --wp24h-card-tone: #b18cff; }
+.wp24h-hub-card-tone--gold { --wp24h-card-tone: #f2bd55; }
+.wp24h-hub-card-tone--teal { --wp24h-card-tone: #42d7c7; }
+.wp24h-hub-card-tone--sky { --wp24h-card-tone: #70c6ff; }
+.wp24h-hub-card-tone--rose { --wp24h-card-tone: #f08aaa; }
+.wp24h-hub-card-tone--slate { --wp24h-card-tone: #a8b8cf; }
 .wp24h-hub-featured-card h2 { margin: 12px 0 14px; color: var(--wp24h-text); font-size: clamp(28px, 3vw, 40px); font-weight: 760; letter-spacing: -.035em; line-height: 1.1; }
 .wp24h-hub-featured-card h2 a:hover { color: #c7f5ff; }
 .wp24h-hub-featured-card__body > p { display: -webkit-box; max-width: 650px; margin: 0 0 17px; overflow: hidden; color: #bdcbe0; font-size: 15px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
@@ -73,7 +84,8 @@
 .wp24h-hub-button:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
 .wp24h-hub-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-.wp24h-hub-secondary-card { display: grid; grid-template-columns: minmax(170px, 42%) minmax(0, 1fr); min-height: 190px; overflow: hidden; border: 1px solid var(--wp24h-border); border-radius: 18px; background: var(--wp24h-surface); }
+.wp24h-hub-secondary-card { display: grid; grid-template-columns: minmax(170px, 42%) minmax(0, 1fr); min-height: 190px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--wp24h-card-tone) 30%, transparent); border-radius: 18px; background: var(--wp24h-surface); transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+.wp24h-hub-secondary-card:hover { border-color: color-mix(in srgb, var(--wp24h-card-tone) 68%, transparent); box-shadow: 0 18px 48px color-mix(in srgb, var(--wp24h-card-tone) 11%, rgb(0 5 18 / 22%)); transform: translateY(-2px); }
 .wp24h-hub-secondary-card__media { display: block; min-height: 190px; overflow: hidden; }
 .wp24h-hub-secondary-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
 .wp24h-hub-secondary-card:hover img { transform: scale(1.035); }
@@ -97,8 +109,8 @@
 .wp24h-hub-section-heading h2 { margin: 0; color: var(--wp24h-text); font-size: clamp(28px, 3vw, 38px); letter-spacing: -.035em; }
 .wp24h-hub-section-heading > a { color: var(--wp24h-cyan); font-size: 13px; font-weight: 750; }
 .wp24h-hub-feed { display: grid; grid-template-columns: 1fr; gap: 16px; }
-.wp24h-hub-card { display: grid; grid-template-columns: minmax(190px, 28%) minmax(0, 1fr); overflow: hidden; border: 1px solid var(--wp24h-border); border-radius: 18px; background: linear-gradient(145deg, rgb(20 41 69 / 92%), rgb(12 28 50 / 96%)); transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
-.wp24h-hub-card:hover { border-color: rgb(32 201 237 / 43%); box-shadow: 0 18px 50px rgb(0 5 18 / 22%); transform: translateY(-3px); }
+.wp24h-hub-card { display: grid; grid-template-columns: minmax(190px, 28%) minmax(0, 1fr); overflow: hidden; border: 1px solid color-mix(in srgb, var(--wp24h-card-tone) 30%, transparent); border-radius: 18px; background: linear-gradient(145deg, rgb(20 41 69 / 92%), rgb(12 28 50 / 96%)); transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
+.wp24h-hub-card:hover { border-color: color-mix(in srgb, var(--wp24h-card-tone) 68%, transparent); box-shadow: 0 18px 50px color-mix(in srgb, var(--wp24h-card-tone) 12%, rgb(0 5 18 / 22%)); transform: translateY(-3px); }
 .wp24h-hub-card__media { display: block; min-height: 175px; overflow: hidden; background: #0a1729; }
 .wp24h-hub-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
 .wp24h-hub-card:hover .wp24h-hub-card__media img { transform: scale(1.025); }

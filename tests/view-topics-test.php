@@ -40,8 +40,25 @@ $topics = array(
 	array( 'slug' => 'desenvolvimento', 'name' => 'Desenvolvimento', 'url' => '/blog/?hub_topic=desenvolvimento' ),
 );
 
+$artificial_intelligence_post = array(
+	'url'          => '/artigo/',
+	'title'        => 'Artigo de inteligência artificial',
+	'excerpt'      => 'Resumo do artigo.',
+	'image'        => '',
+	'image_alt'    => '',
+	'date'         => '7 set 2026',
+	'reading_time' => '8',
+	'category'     => array(
+		'slug' => 'inteligencia-artificial',
+		'name' => 'Inteligência Artificial',
+	),
+);
+
 $html = \WP24H\EditorialHub\View::render(
 	array(
+		'hero'            => $artificial_intelligence_post,
+		'secondary'       => array( $artificial_intelligence_post ),
+		'posts'           => array( $artificial_intelligence_post ),
 		'categories'      => $topics,
 		'active_category' => '',
 		'courses_url'     => '/cursos/',
@@ -65,6 +82,9 @@ assert_true( false !== $sharing_start && $sharing_start > $topics_start && $shar
 assert_true( 4 === substr_count( $html, 'class="wp24h-hub-share"' ), 'The hero exposes four share actions.' );
 assert_true( 4 === substr_count( $html, 'class="wp24h-hub-share"' ) && 4 === preg_match_all( '/class="wp24h-hub-share"[^>]*aria-label="Compartilhar no [^"]+"[^>]*>\s*<svg/s', $html ), 'Share actions are accessible icon-only links.' );
 assert_true( 1 === substr_count( $html, '<h1>' ), 'The hub renders a single primary heading.' );
+assert_true( str_contains( $html, 'class="wp24h-hub-featured-card wp24h-hub-card-tone--cyan"' ), 'Featured cards inherit their category tone.' );
+assert_true( str_contains( $html, 'class="wp24h-hub-secondary-card wp24h-hub-card-tone--cyan"' ), 'Secondary cards inherit their category tone.' );
+assert_true( str_contains( $html, 'class="wp24h-hub-card wp24h-hub-card-tone--cyan"' ), 'Feed cards inherit their category tone.' );
 
 $css = file_get_contents( dirname( __DIR__ ) . '/assets/editorial-hub.css' );
 assert_true( false !== $css, 'Topic stylesheet is readable.' );
