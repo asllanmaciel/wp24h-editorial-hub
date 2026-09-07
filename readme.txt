@@ -4,7 +4,7 @@ Tags: editorial, blog, content, courses
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,9 @@ Não. Todo conteúdo permanece livre. A chamada para cursos funciona como contin
 Não. O plugin deixa de depender do Listing Grid apenas na página configurada e não modifica o JetEngine em outras áreas.
 
 == Changelog ==
+
+= 1.0.5 =
+* Substitui a faixa horizontal de assuntos por uma grade responsiva de caixas coloridas com ícones identificáveis.
 
 = 1.0.4 =
 * Remove a altura mínima residual dos cards no celular.

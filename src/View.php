@@ -37,6 +37,13 @@ final class View {
 						<?php endif; ?>
 						<button type="submit" aria-label="Pesquisar artigos"><span>Pesquisar</span><span aria-hidden="true">⌕</span></button>
 					</form>
+					<nav class="wp24h-hub-topics" aria-label="Assuntos do blog">
+						<?php foreach ( $categories as $category ) : ?>
+							<?php $selected = $active === (string) $category['slug']; ?>
+							<a class="wp24h-hub-topic<?php echo $selected ? ' is-active' : ''; ?> wp24h-hub-label--<?php echo esc_attr( self::categoryTone( (string) $category['slug'] ) ); ?>" href="<?php echo esc_url( $category['url'] ); ?>"<?php echo $selected ? ' aria-current="page"' : ''; ?>><span class="wp24h-hub-topic__icon" aria-hidden="true"><?php echo self::categoryIcon( (string) $category['slug'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span><span class="wp24h-hub-topic__label"><?php echo esc_html( $category['name'] ); ?></span></a>
+						<?php endforeach; ?>
+					</nav>
+					<?php self::renderShareLinks( $home_url ); ?>
 				</div>
 			</header>
 
@@ -51,13 +58,6 @@ final class View {
 					</div>
 				</section>
 			<?php endif; ?>
-
-			<nav class="wp24h-hub-shell wp24h-hub-topics" aria-label="Assuntos do blog">
-				<?php foreach ( $categories as $category ) : ?>
-					<?php $selected = $active === (string) $category['slug']; ?>
-					<a class="wp24h-hub-topic<?php echo $selected ? ' is-active' : ''; ?> wp24h-hub-label--<?php echo esc_attr( self::categoryTone( (string) $category['slug'] ) ); ?>" href="<?php echo esc_url( $category['url'] ); ?>"<?php echo $selected ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $category['name'] ); ?></a>
-				<?php endforeach; ?>
-			</nav>
 
 			<section class="wp24h-hub-shell wp24h-hub-latest" aria-labelledby="wp24h-latest-title">
 				<div class="wp24h-hub-section-heading">
@@ -133,6 +133,54 @@ final class View {
 
 		$fallback = array( 'cyan', 'blue', 'green', 'violet', 'gold', 'teal' );
 		return $fallback[ (int) sprintf( '%u', crc32( $slug ) ) % count( $fallback ) ];
+	}
+
+	private static function categoryIcon( string $slug ): string {
+		$icons = array(
+			''                       => '<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>',
+			'programacao'            => '<path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/>',
+			'desenvolvimento-pessoal'=> '<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM5 21a7 7 0 0 1 14 0M17 8h4M19 6v4"/>',
+			'empreendedorismo'       => '<path d="m14 4 6 6-6 6-4-4-6 6v-8l6-6 4 4Z"/>',
+			'cursos'                 => '<path d="m3 10 9-5 9 5-9 5-9-5ZM7 13v4c3 2 7 2 10 0v-4M21 10v6"/>',
+			'guia-para-iniciantes'   => '<circle cx="12" cy="12" r="9"/><path d="m15 9-2 4-4 2 2-4 4-2Z"/>',
+			'dinheiro'               => '<path d="M4 7h16v12H4zM4 10h16M8 15h.01M12 15h4"/>',
+			'marketing-digital'      => '<path d="m4 13 10-4v8L4 13ZM14 11l5-3v10l-5-3M6 14l1 5h4l-2-4"/>',
+			'inteligencia-artificial'=> '<rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+			'desenvolvimento'        => '<path d="M4 5h16v14H4zM4 9h16M8 13l-2 2 2 2M12 17h4"/>',
+		);
+
+		$paths = $icons[ $slug ] ?? '<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>';
+
+		return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">' . $paths . '</svg>';
+	}
+
+	private static function renderShareLinks( string $home_url ): void {
+		$title = 'Tecnologia, IA e Negócios Digitais';
+		$links = array(
+			'Facebook' => array(
+				'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $home_url ),
+				'<path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v6h4v-6h3l1-4h-4V9c0-.7.3-1 1-1Z"/>',
+			),
+			'X' => array(
+				'https://twitter.com/intent/tweet?url=' . rawurlencode( $home_url ) . '&text=' . rawurlencode( $title ),
+				'<path d="M5 4l14 16M19 4 5 20"/>',
+			),
+			'LinkedIn' => array(
+				'https://www.linkedin.com/sharing/share-offsite/?url=' . rawurlencode( $home_url ),
+				'<path d="M6 9v10M6 5.5v.01M10.5 19v-6c0-2.3 3.5-2.5 3.5 0v6M10.5 9v10M18 19v-6.5c0-4.8-5.2-4.6-7.5-2.2"/>',
+			),
+			'WhatsApp' => array(
+				'https://api.whatsapp.com/send?text=' . rawurlencode( $title . ' ' . $home_url ),
+				'<path d="M20 11.7a8 8 0 0 1-11.8 7L4 20l1.3-4A8 8 0 1 1 20 11.7Z"/><path d="M9 8.5c.5 2.3 2.2 4 4.5 4.8l1.2-1.2 2 .8c-.2 1.5-1.3 2.3-2.7 2.3-3.7-.4-6.6-3.2-7.1-6.9C6.8 7 7.7 6 9.1 5.8l.8 2-1 1Z"/>',
+			),
+		);
+		?>
+		<nav class="wp24h-hub-sharing" aria-label="Compartilhar esta página">
+			<?php foreach ( $links as $network => $link ) : ?>
+				<a class="wp24h-hub-share" href="<?php echo esc_url( $link[0] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no <?php echo esc_attr( $network ); ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><?php echo $link[1]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></svg></a>
+			<?php endforeach; ?>
+		</nav>
+		<?php
 	}
 
 	/** @param array<string,mixed> $post */

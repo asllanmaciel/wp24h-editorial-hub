@@ -3,7 +3,7 @@
  * Plugin Name: WP24H Editorial Hub
  * Plugin URI: https://github.com/asllanmaciel/wp24h-editorial-hub
  * Description: Replaces the public blog listing with a first-party editorial hub for open content and courses.
- * Version: 1.0.4
+ * Version: 1.0.6
  * Requires at least: 6.4
  * Requires PHP: 8.1
  * Author: Asllan Maciel
@@ -17,7 +17,7 @@ declare( strict_types=1 );
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WP24H_EDITORIAL_HUB_VERSION', '1.0.4' );
+define( 'WP24H_EDITORIAL_HUB_VERSION', '1.0.6' );
 
 require_once __DIR__ . '/src/EditorialDataSource.php';
 require_once __DIR__ . '/src/PostPresenter.php';
