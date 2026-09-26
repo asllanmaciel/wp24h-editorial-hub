@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8 — 2026-09-26
+
+- Identifica posts de séries em todos os cards com um selo clicável para o arquivo correspondente, preservando a categoria.
+
 ## 1.0.7 — 2026-09-07
 
 - Adiciona tons de borda coerentes com a categoria de cada card.

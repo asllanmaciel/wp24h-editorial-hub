@@ -29,7 +29,7 @@ $GLOBALS['wp24h_is_page'] = true;
 $hub->enqueueAssets();
 assert_same( 'wp24h-editorial-hub', $GLOBALS['wp24h_styles'][0]['handle'] );
 assert_contains( 'assets/editorial-hub.css', $GLOBALS['wp24h_styles'][0]['src'] );
-assert_same( '1.0.7', $GLOBALS['wp24h_styles'][0]['version'] );
+assert_same( '1.0.8', $GLOBALS['wp24h_styles'][0]['version'] );
 
 $GLOBALS['wp24h_is_page'] = false;
 assert_same( array( 'existing' ), $hub->addBodyClass( array( 'existing' ) ), 'Other pages keep their body classes.' );
@@ -50,6 +50,8 @@ assert_contains( '.wp24h-editorial-hub-page .elementor > .e-con:has(.elementor-p
 assert_contains( '.wp24h-editorial-hub-page { overflow-x: clip;', $css, 'The full-bleed layout does not create horizontal page scrolling.' );
 assert_contains( 'min-height: 175px', $css, 'Feed cards stay compact when excerpts are short.' );
 assert_contains( '.wp24h-hub-label--violet', $css, 'Category badges have distinct visual tones.' );
+assert_contains( '.wp24h-hub-card-labels { display: flex;', $css, 'Category and series badges share a wrapping label row.' );
+assert_contains( '.wp24h-hub-series-label { display: inline-flex;', $css, 'Series identity has a compact badge treatment.' );
 assert_contains( '.wp24h-hub-card__body { min-height: 0;', $css, 'Mobile card bodies do not preserve the old empty vertical space.' );
 
 echo "AssetsTest passed\n";

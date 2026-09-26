@@ -55,6 +55,9 @@
 .wp24h-hub-featured-card:hover .wp24h-hub-featured-card__media img { transform: scale(1.025); }
 .wp24h-hub-featured-card__body { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 42px; background: linear-gradient(145deg, #122844, #0d1e35); }
 .wp24h-hub-label { --wp24h-label: var(--wp24h-cyan); display: inline-flex; width: fit-content; align-items: center; padding: 5px 9px; border: 1px solid color-mix(in srgb, var(--wp24h-label) 42%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--wp24h-label) 10%, transparent); color: var(--wp24h-label) !important; font-size: 10px; font-weight: 800; letter-spacing: .08em; line-height: 1; text-transform: uppercase; }
+.wp24h-hub-card-labels { display: flex; max-width: 100%; flex-wrap: wrap; align-items: center; gap: 7px; }
+.wp24h-hub-series-label { display: inline-flex; width: fit-content; max-width: 100%; align-items: center; padding: 5px 9px; border: 1px solid rgb(112 230 255 / 34%); border-radius: 999px; background: rgb(32 201 237 / 8%); color: #9beeff !important; font-size: 10px; font-weight: 800; letter-spacing: .025em; line-height: 1.2; overflow-wrap: anywhere; }
+.wp24h-hub-series-label:hover { border-color: rgb(112 230 255 / 68%); background: rgb(32 201 237 / 15%); color: #d8faff !important; }
 .wp24h-hub-label:hover { background: color-mix(in srgb, var(--wp24h-label) 18%, transparent); }
 .wp24h-hub-label--cyan { --wp24h-label: #20c9ed; }
 .wp24h-hub-label--blue { --wp24h-label: #4b96ff; }
