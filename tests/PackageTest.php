@@ -4,7 +4,7 @@ declare( strict_types=1 );
 
 require_once __DIR__ . '/bootstrap.php';
 
-$package = __DIR__ . '/../dist/wp24h-editorial-hub-1.0.4.zip';
+$package = __DIR__ . '/../dist/wp24h-editorial-hub-1.0.7.zip';
 assert_true( is_file( $package ), 'The production ZIP exists.' );
 
 $zip = new ZipArchive();

@@ -58,7 +58,7 @@ assert_contains( 'Conteúdos práticos para construir produtos', $html );
 assert_contains( 'role="search"', $html );
 assert_contains( 'value="agentes &lt;script&gt;"', $html, 'Search values are escaped.' );
 assert_contains( 'wp24h-hub-featured', $html );
-assert_same( 2, substr_count( $html, '<article class="wp24h-hub-secondary-card">' ), 'Exactly two secondary cards are rendered.' );
+assert_same( 2, substr_count( $html, '<article class="wp24h-hub-secondary-card ' ), 'Exactly two secondary cards are rendered.' );
 assert_contains( 'wp24h-hub-topic is-active', $html );
 assert_contains( 'wp24h-hub-feed', $html );
 assert_contains( 'Últimos conteúdos', $html );
