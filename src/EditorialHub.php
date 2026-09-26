@@ -7,7 +7,7 @@ namespace WP24H\EditorialHub;
 use Throwable;
 
 final class EditorialHub {
-	private const VERSION = '1.0.7';
+	private const VERSION = '1.0.8';
 
 	private const FEATURED_META = '_wp24h_editorial_featured';
 

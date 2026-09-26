@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.8 — 2026-09-26
+
+- Identifica posts de séries em todos os cards com um selo clicável para o arquivo correspondente, preservando a categoria.
+
+## 1.0.7 — 2026-09-07
+
+- Adiciona tons de borda coerentes com a categoria de cada card.
+
+## 1.0.6 — 2026-09-07
+
+- Unifica o hero editorial e mantém a pesquisa e os assuntos no mesmo cabeçalho.
+
+## 1.0.5 — 2026-09-02
+
+- Substitui a faixa horizontal de assuntos por uma grade responsiva de caixas coloridas com ícones identificáveis.
+
 ## 1.0.4 — 2026-09-02
 
 - Remove a altura mínima residual dos cards no celular.

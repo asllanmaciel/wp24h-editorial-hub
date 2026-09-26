@@ -50,6 +50,18 @@ function get_the_category( int $post_id ): array {
 	return array( (object) array( 'name' => 'Inteligência Artificial', 'slug' => 'inteligencia-artificial' ) );
 }
 
+function get_the_terms( int $post_id, string $taxonomy ): array|WP_Error|false {
+	if ( 'series' !== $taxonomy ) {
+		return false;
+	}
+
+	return $GLOBALS['wp24h_series_terms'][ $post_id ] ?? false;
+}
+
+function get_term_link( object $term ): string|WP_Error {
+	return isset( $term->slug ) ? 'https://example.test/series/' . $term->slug . '/' : new WP_Error();
+}
+
 function get_the_date( string $format, WP_Post $post ): string {
 	return '2 set 2026';
 }
@@ -71,6 +83,7 @@ $GLOBALS['wp24h_other_featured']  = array();
 $GLOBALS['wp24h_actions']         = array();
 $GLOBALS['wp24h_filters']         = array();
 $GLOBALS['wp24h_styles']          = array();
+$GLOBALS['wp24h_series_terms']    = array();
 
 function is_page( int $page_id = 0 ): bool {
 	return $GLOBALS['wp24h_is_page'] && ( 0 === $page_id || 6 === $page_id );

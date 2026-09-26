@@ -91,19 +91,24 @@ final class View {
 		?>
 		<article class="wp24h-hub-featured-card wp24h-hub-card-tone--<?php echo esc_attr( self::categoryTone( (string) ( $post['category']['slug'] ?? '' ) ) ); ?>">
 			<a class="wp24h-hub-featured-card__media" href="<?php echo esc_url( $post['url'] ); ?>" tabindex="-1" aria-hidden="true"><?php self::renderImage( $post, true ); ?></a>
-			<div class="wp24h-hub-featured-card__body"><?php self::renderCategoryBadge( $post, $category_urls, $home_url, 'Destaque · ' ); ?><h2><a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a></h2><p><?php echo esc_html( $post['excerpt'] ); ?></p><?php self::renderMeta( $post ); ?><a class="wp24h-hub-button" href="<?php echo esc_url( $post['url'] ); ?>">Ler artigo <span aria-hidden="true">→</span></a></div>
+			<div class="wp24h-hub-featured-card__body"><?php self::renderBadges( $post, $category_urls, $home_url, 'Destaque · ' ); ?><h2><a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a></h2><p><?php echo esc_html( $post['excerpt'] ); ?></p><?php self::renderMeta( $post ); ?><a class="wp24h-hub-button" href="<?php echo esc_url( $post['url'] ); ?>">Ler artigo <span aria-hidden="true">→</span></a></div>
 		</article>
 		<?php
 	}
 
 	/** @param array<string,mixed> $post */
 	private static function renderSecondaryCard( array $post, array $category_urls, string $home_url ): void {
-		?><article class="wp24h-hub-secondary-card wp24h-hub-card-tone--<?php echo esc_attr( self::categoryTone( (string) ( $post['category']['slug'] ?? '' ) ) ); ?>"><a class="wp24h-hub-secondary-card__media" href="<?php echo esc_url( $post['url'] ); ?>" tabindex="-1" aria-hidden="true"><?php self::renderImage( $post ); ?></a><div><?php self::renderCategoryBadge( $post, $category_urls, $home_url ); ?><h2><a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a></h2><?php self::renderMeta( $post ); ?></div></article><?php
+		?><article class="wp24h-hub-secondary-card wp24h-hub-card-tone--<?php echo esc_attr( self::categoryTone( (string) ( $post['category']['slug'] ?? '' ) ) ); ?>"><a class="wp24h-hub-secondary-card__media" href="<?php echo esc_url( $post['url'] ); ?>" tabindex="-1" aria-hidden="true"><?php self::renderImage( $post ); ?></a><div><?php self::renderBadges( $post, $category_urls, $home_url ); ?><h2><a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a></h2><?php self::renderMeta( $post ); ?></div></article><?php
 	}
 
 	/** @param array<string,mixed> $post */
 	private static function renderFeedCard( array $post, array $category_urls, string $home_url ): void {
-		?><article class="wp24h-hub-card wp24h-hub-card-tone--<?php echo esc_attr( self::categoryTone( (string) ( $post['category']['slug'] ?? '' ) ) ); ?>"><a class="wp24h-hub-card__media" href="<?php echo esc_url( $post['url'] ); ?>" tabindex="-1" aria-hidden="true"><?php self::renderImage( $post ); ?></a><div class="wp24h-hub-card__body"><?php self::renderCategoryBadge( $post, $category_urls, $home_url ); ?><h3><a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a></h3><p><?php echo esc_html( $post['excerpt'] ); ?></p><?php self::renderMeta( $post ); ?><a class="wp24h-hub-read" href="<?php echo esc_url( $post['url'] ); ?>">Ler artigo <span aria-hidden="true">→</span></a></div></article><?php
+		?><article class="wp24h-hub-card wp24h-hub-card-tone--<?php echo esc_attr( self::categoryTone( (string) ( $post['category']['slug'] ?? '' ) ) ); ?>"><a class="wp24h-hub-card__media" href="<?php echo esc_url( $post['url'] ); ?>" tabindex="-1" aria-hidden="true"><?php self::renderImage( $post ); ?></a><div class="wp24h-hub-card__body"><?php self::renderBadges( $post, $category_urls, $home_url ); ?><h3><a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a></h3><p><?php echo esc_html( $post['excerpt'] ); ?></p><?php self::renderMeta( $post ); ?><a class="wp24h-hub-read" href="<?php echo esc_url( $post['url'] ); ?>">Ler artigo <span aria-hidden="true">→</span></a></div></article><?php
+	}
+
+	/** @param array<string,mixed> $post @param array<string,string> $category_urls */
+	private static function renderBadges( array $post, array $category_urls, string $home_url, string $prefix = '' ): void {
+		?><div class="wp24h-hub-card-labels"><?php self::renderCategoryBadge( $post, $category_urls, $home_url, $prefix ); ?><?php self::renderSeriesBadge( $post ); ?></div><?php
 	}
 
 	/** @param array<string,mixed> $post @param array<string,string> $category_urls */
@@ -111,6 +116,17 @@ final class View {
 		$slug = (string) ( $post['category']['slug'] ?? '' );
 		$url  = (string) ( $category_urls[ $slug ] ?? add_query_arg( 'hub_topic', $slug, $home_url ) );
 		?><a class="wp24h-hub-label wp24h-hub-label--<?php echo esc_attr( self::categoryTone( $slug ) ); ?>" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $prefix . (string) $post['category']['name'] ); ?></a><?php
+	}
+
+	/** @param array<string,mixed> $post */
+	private static function renderSeriesBadge( array $post ): void {
+		$series = is_array( $post['series'] ?? null ) ? $post['series'] : array();
+		$name   = trim( (string) ( $series['name'] ?? '' ) );
+		$url    = (string) ( $series['url'] ?? '' );
+		if ( '' === $name || '' === $url ) {
+			return;
+		}
+		?><a class="wp24h-hub-series-label" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( 'Série · ' . $name ); ?></a><?php
 	}
 
 	private static function categoryTone( string $slug ): string {

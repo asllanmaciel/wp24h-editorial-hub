@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $pluginSource = $repositoryRoot
 $artifactDirectory = Join-Path $repositoryRoot 'dist'
-$packagePath = Join-Path $artifactDirectory 'wp24h-editorial-hub-1.0.4.zip'
+$packagePath = Join-Path $artifactDirectory 'wp24h-editorial-hub-1.0.8.zip'
 $temporaryRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('wp24h-editorial-hub-' + [Guid]::NewGuid().ToString('N'))
 $stagingPlugin = Join-Path $temporaryRoot 'wp24h-editorial-hub'
 

@@ -29,7 +29,7 @@ $GLOBALS['wp24h_is_page'] = true;
 $hub->enqueueAssets();
 assert_same( 'wp24h-editorial-hub', $GLOBALS['wp24h_styles'][0]['handle'] );
 assert_contains( 'assets/editorial-hub.css', $GLOBALS['wp24h_styles'][0]['src'] );
-assert_same( '1.0.4', $GLOBALS['wp24h_styles'][0]['version'] );
+assert_same( '1.0.8', $GLOBALS['wp24h_styles'][0]['version'] );
 
 $GLOBALS['wp24h_is_page'] = false;
 assert_same( array( 'existing' ), $hub->addBodyClass( array( 'existing' ) ), 'Other pages keep their body classes.' );
@@ -44,12 +44,14 @@ assert_contains( '.wp24h-hub-feed { display: grid; grid-template-columns: 1fr', 
 assert_contains( '.wp24h-hub-card { display: grid; grid-template-columns: minmax(190px, 28%) minmax(0, 1fr)', $css, 'Desktop cards use a compact horizontal image-and-copy layout.' );
 assert_contains( '@media (max-width: 760px)', $css );
 assert_contains( 'grid-template-columns: 1fr', $css, 'The mobile feed uses one column.' );
-assert_contains( 'overflow-x: auto', $css, 'Topic navigation can scroll on narrow screens.' );
+assert_contains( '.wp24h-hub-topics { display: grid;', $css, 'Topic navigation uses the current responsive grid.' );
 assert_contains( ':focus-visible', $css, 'Keyboard focus remains visible.' );
 assert_contains( '.wp24h-editorial-hub-page .elementor > .e-con:has(.elementor-page-title)', $css, 'The legacy Elementor title banner is hidden only on the configured hub page.' );
 assert_contains( '.wp24h-editorial-hub-page { overflow-x: clip;', $css, 'The full-bleed layout does not create horizontal page scrolling.' );
 assert_contains( 'min-height: 175px', $css, 'Feed cards stay compact when excerpts are short.' );
 assert_contains( '.wp24h-hub-label--violet', $css, 'Category badges have distinct visual tones.' );
+assert_contains( '.wp24h-hub-card-labels { display: flex;', $css, 'Category and series badges share a wrapping label row.' );
+assert_contains( '.wp24h-hub-series-label { display: inline-flex;', $css, 'Series identity has a compact badge treatment.' );
 assert_contains( '.wp24h-hub-card__body { min-height: 0;', $css, 'Mobile card bodies do not preserve the old empty vertical space.' );
 
 echo "AssetsTest passed\n";
