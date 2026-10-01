@@ -29,7 +29,7 @@ $GLOBALS['wp24h_is_page'] = true;
 $hub->enqueueAssets();
 assert_same( 'wp24h-editorial-hub', $GLOBALS['wp24h_styles'][0]['handle'] );
 assert_contains( 'assets/editorial-hub.css', $GLOBALS['wp24h_styles'][0]['src'] );
-assert_same( '1.0.8', $GLOBALS['wp24h_styles'][0]['version'] );
+assert_same( '1.0.9', $GLOBALS['wp24h_styles'][0]['version'] );
 
 $GLOBALS['wp24h_is_page'] = false;
 assert_same( array( 'existing' ), $hub->addBodyClass( array( 'existing' ) ), 'Other pages keep their body classes.' );

@@ -36,6 +36,19 @@ assert_contains( 'hub_topic=programacao', $home['categories'][1]['url'] );
 assert_contains( 'hub_page=2', $home['pagination'] );
 
 WP_Query::$calls = array();
+WP_Query::$queue = array(
+	array( 'posts' => array( $make_post( 1 ) ) ),
+	array( 'posts' => array( $make_post( 2 ), $make_post( 3 ) ) ),
+	array( 'posts' => array( $make_post( 12 ), $make_post( 13 ) ), 'max_num_pages' => 3 ),
+);
+
+$page_two = $repository->home( '', '', 2 );
+assert_true( $page_two['is_filtered'], 'Later pages retain the compact results layout.' );
+assert_same( 3, count( WP_Query::$calls ), 'Later unfiltered pages resolve the same highlights before paginating the feed.' );
+assert_same( array( 1, 2, 3 ), WP_Query::$calls[2]['post__not_in'], 'Later pages exclude the highlights used on page one.' );
+assert_same( 2, WP_Query::$calls[2]['paged'], 'The exclusion set does not change the requested page.' );
+
+WP_Query::$calls = array();
 WP_Query::$queue = array( array( 'posts' => array( $make_post( 6 ) ), 'max_num_pages' => 1 ) );
 $filtered = $repository->home( 'agentes', 'programacao', 2 );
 assert_true( $filtered['is_filtered'], 'Search, topic, or later pages use results mode.' );

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9 — 2026-09-30
+
+- Mantém os três destaques fora de todas as páginas do feed, evitando artigos repetidos e lacunas na paginação.
+
 ## 1.0.8 — 2026-09-26
 
 - Identifica posts de séries em todos os cards com um selo clicável para o arquivo correspondente, preservando a categoria.

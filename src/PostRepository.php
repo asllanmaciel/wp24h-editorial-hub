@@ -12,12 +12,13 @@ class PostRepository implements EditorialDataSource {
 	/** @return array<string,mixed> */
 	public function home( string $search, string $topic, int $page ): array {
 		$page        = max( 1, $page );
-		$is_filtered = '' !== $search || '' !== $topic || 1 < $page;
+		$has_filters = '' !== $search || '' !== $topic;
+		$is_filtered = $has_filters || 1 < $page;
 		$hero        = null;
 		$secondary   = array();
 		$excluded    = array();
 
-		if ( ! $is_filtered ) {
+		if ( ! $has_filters ) {
 			$featured = $this->query(
 				array(
 					'posts_per_page' => 1,
