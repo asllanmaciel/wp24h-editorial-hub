@@ -4,7 +4,7 @@ Tags: editorial, blog, content, courses
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ O conteúdo permanece público. O plugin não cria assinaturas, não coleta dado
 
 == Installation ==
 
-1. Envie e ative o arquivo wp24h-editorial-hub-1.0.8.zip.
+1. Envie e ative o arquivo wp24h-editorial-hub-1.0.9.zip.
 2. Por padrão, o hub atua na página de ID 6.
 3. Para usar outro ID, defina `WP24H_EDITORIAL_HUB_PAGE_ID` no wp-config.php.
 4. Edite um post e use a caixa “Destaque editorial” para selecionar o conteúdo principal.
@@ -36,6 +36,9 @@ Não. Todo conteúdo permanece livre. A chamada para cursos funciona como contin
 Não. O plugin deixa de depender do Listing Grid apenas na página configurada e não modifica o JetEngine em outras áreas.
 
 == Changelog ==
+
+= 1.0.9 =
+* Mantém os três destaques fora de todas as páginas do feed, evitando artigos repetidos e lacunas na paginação.
 
 = 1.0.8 =
 * Identifica posts de séries em todos os cards com um selo clicável para o arquivo correspondente, preservando a categoria.
